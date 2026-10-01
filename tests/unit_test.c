@@ -112,7 +112,8 @@ Test(fixed, reusable_across_several_rounds, .timeout = BAR_TIMEOUT)
  * create()/wait()/destroy() still have to work. */
 Test(fixed, single_thread, .timeout = BAR_TIMEOUT)
 {
-    cr_assert_fail("TODO: write this case -- see the worked example above");
+    cr_assert_eq(run_reuse_check(&bar_fixed, 1, 20), 0,
+            "bar_fixed failed with a single thread");
 }
 
 /* TODO: more_threads_than_cores -- pick an nthreads well above what this
@@ -120,7 +121,8 @@ Test(fixed, single_thread, .timeout = BAR_TIMEOUT)
  * the case barrier.h's comment on MAX_THREADS=128 exists for. */
 Test(fixed, more_threads_than_cores, .timeout = BAR_TIMEOUT_SLOW)
 {
-    cr_assert_fail("TODO: write this case -- see the worked example above");
+    cr_assert_eq(run_reuse_check(&bar_fixed, 64, 20), 0,
+                 "bar_fixed failed with more threads than cores");
 }
 
 /* ------------------------------------------------------------ bar_alt --- */
@@ -138,11 +140,13 @@ Test(alt, reusable_across_several_rounds, .timeout = BAR_TIMEOUT)
 /* TODO: single_thread -- nthreads=1. */
 Test(alt, single_thread, .timeout = BAR_TIMEOUT)
 {
-    cr_assert_fail("TODO: write this case -- see the worked example above");
+        cr_assert_eq(run_reuse_check(&bar_alt, 1, 20), 0,
+                 "bar_alt failed with a single thread");
 }
 
 /* TODO: more_threads_than_cores -- same idea as bar_fixed's version above. */
 Test(alt, more_threads_than_cores, .timeout = BAR_TIMEOUT_SLOW)
 {
-    cr_assert_fail("TODO: write this case -- see the worked example above");
+    cr_assert_eq(run_reuse_check(&bar_alt, 64, 20), 0,
+                 "bar_alt failed with more threads than cores");
 }
